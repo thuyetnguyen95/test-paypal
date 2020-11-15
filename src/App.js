@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import axios from 'axios'
+
+const apiUrl = 'http://localhost:3333'
 
 function App() {
+  async function handleSub(params) {
+    const response = await axios.get(apiUrl + '/sub')
+    const { links } = response.data
+    const approveLink = links.filter(l => l.rel === 'approve')
+    console.log(response)
+    window.open(approveLink[0].href, '_blank', "width: 400px; height: 600px; top: 50px;")
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>xin chào</p>
+      <button className="subButton" onClick={handleSub}>Subscription</button>
     </div>
   );
 }
